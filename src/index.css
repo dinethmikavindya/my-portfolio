@@ -1,0 +1,489 @@
+@import "tailwindcss";
+
+/* ─── THEME VARIABLES ─────────────────────────────── */
+:root {
+  --petal-frost: #ffd6ff;
+  --mauve: #e7c6ff;
+  --mauve-2: #c8b6ff;
+  --periwinkle: #b8c0ff;
+  --periwinkle-2: #bbd0ff;
+
+  --bg: #f5f0ff;
+  --surface-a: #ffd6ff;
+  --surface-b: #e7c6ff;
+  --surface-c: #c8b6ff;
+  --surface-d: #b8c0ff;
+  --surface-e: #bbd0ff;
+  --card-bg: #ffffff;
+  --text-primary: #0a0a0a;
+  --text-secondary: #2a2a2a;
+  --text-muted: #555577;
+  --border: #0a0a0a;
+  --border-width: 3px;
+  --accent: #7b5ea7;
+  --accent-glow: rgba(123, 94, 167, 0.3);
+  --pixel-shadow: 4px 4px 0px #0a0a0a;
+  --folder-shadow: 6px 6px 0px #0a0a0a;
+}
+
+.dark {
+  --bg: #080808;
+  --surface-a: #0f2233;
+  --surface-b: #0e2e30;
+  --surface-c: #0a1e28;
+  --surface-d: #0d2035;
+  --surface-e: #0a1820;
+  --card-bg: #101c28;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted: #d0e8f5;
+  --border: #ffffff;
+  --accent: #bbd0ff;
+  --accent-glow: rgba(187, 208, 255, 0.2);
+  --pixel-shadow: 4px 4px 0px #ffffff;
+  --folder-shadow: 6px 6px 0px #ffffff;
+}
+
+/* ─── GLOBAL RESET ────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Space Mono', monospace;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* ─── TYPOGRAPHY ──────────────────────────────────── */
+.font-pixel   { font-family: 'Press Start 2P', monospace; }
+.font-orbit   { font-family: 'Orbitron', sans-serif; }
+.font-mono    { font-family: 'Space Mono', monospace; }
+
+/* ─── PIXEL BORDER UTILITY ────────────────────────── */
+.pixel-border {
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--pixel-shadow);
+}
+
+.pixel-border-sm {
+  border: 2px solid var(--border);
+  box-shadow: 2px 2px 0 var(--border);
+}
+
+/* ─── BENTO CELL BASE ─────────────────────────────── */
+.bento-cell {
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--pixel-shadow);
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-cell:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--border);
+}
+
+/* ─── SCANLINE OVERLAY ────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ─── FOLDER CARD ─────────────────────────────────── */
+.folder-card {
+  position: relative;
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--folder-shadow);
+  border-radius: 0 8px 8px 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.folder-tab {
+  position: absolute;
+  top: calc(-1 * (var(--border-width) + 28px));
+  left: -1px;
+  padding: 6px 20px;
+  border: var(--border-width) solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.folder-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--border);
+}
+
+/* ─── GLITCH TEXT ─────────────────────────────────── */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-2px, 0); }
+  20%       { clip-path: inset(30% 0 40% 0); transform: translate(2px, 0); }
+  40%       { clip-path: inset(70% 0 10% 0); transform: translate(-1px, 0); }
+  60%       { clip-path: inset(10% 0 80% 0); transform: translate(1px, 0); }
+  80%       { clip-path: inset(55% 0 25% 0); transform: translate(-2px, 0); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 0); }
+  25%       { clip-path: inset(15% 0 65% 0); transform: translate(-2px, 0); }
+  50%       { clip-path: inset(45% 0 35% 0); transform: translate(1px, 0); }
+  75%       { clip-path: inset(90% 0 2% 0); transform: translate(-1px, 0); }
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.glitch-text::before {
+  color: var(--periwinkle);
+  animation: glitch-1 3s infinite linear;
+}
+
+.glitch-text::after {
+  color: var(--mauve-2, #c8b6ff);
+  animation: glitch-2 3s infinite linear;
+  animation-delay: 0.1s;
+}
+
+/* ─── PIXEL CURSOR BLINK ──────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.blink { animation: blink 1s infinite; }
+
+/* ─── FLOAT ANIMATION ─────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.float { animation: float 3s ease-in-out infinite; }
+
+/* ─── PIXEL MARQUEE ───────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 20s linear infinite; }
+
+/* ─── PAGE BREAK ──────────────────────────────────── */
+.page-break {
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.break-line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border) 0px,
+    var(--border) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* ─── SECTION ─────────────────────────────────────── */
+section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── NAVBAR ──────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-bottom: var(--border-width) solid var(--border);
+  transition: background 0.4s ease;
+}
+
+/* ─── PROJECT CARDS ───────────────────────────────── */
+.project-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0 var(--border);
+  border-radius: 4px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--border);
+}
+
+/* ─── PIXEL TAG ───────────────────────────────────── */
+.pixel-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border: 2px solid var(--border);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  letter-spacing: 0.05em;
+  background: var(--surface-a);
+  box-shadow: 2px 2px 0 var(--border);
+  color: var(--text-primary);
+}
+
+/* ─── BUTTON PIXEL ────────────────────────────────── */
+.btn-pixel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 20px;
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--pixel-shadow);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  background: var(--surface-a);
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.btn-pixel:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--border);
+}
+
+.btn-pixel:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--border);
+}
+
+.btn-pixel.dark-btn {
+  background: var(--surface-b);
+}
+
+/* ─── PIXEL PROGRESS BAR ──────────────────────────── */
+.pixel-bar-bg {
+  height: 12px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.pixel-bar-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 8px,
+    transparent 8px,
+    transparent 10px
+  );
+  transition: width 1s ease;
+}
+
+/* ─── CONTACT LINKS ───────────────────────────────── */
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0 var(--border);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.contact-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--border);
+}
+
+/* ─── GRID NOISE TEXTURE ──────────────────────────── */
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── SCROLLBAR ───────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0;
+}
+
+/* ─── SELECTION ───────────────────────────────────── */
+::selection {
+  background: var(--mauve-2, #c8b6ff);
+  color: #0a0a0a;
+}
+
+/* ─── PIXEL GRID BG ───────────────────────────────── */
+.pixel-grid-bg {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .pixel-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ─── DARK MODE EXPLICIT OVERRIDES ───────────────────
+   Force white text on all dark surfaces so nothing
+   ever goes invisible regardless of inheritance       */
+.dark .project-card,
+.dark .project-card * { color: var(--text-primary) !important; }
+
+.dark .project-card .pixel-tag {
+  background: rgba(255,255,255,0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.6) !important;
+}
+
+.dark .bento-cell,
+.dark .bento-cell p,
+.dark .bento-cell span,
+.dark .bento-cell div { color: var(--text-primary); }
+
+/* Muted labels stay readable but slightly dimmer */
+.dark [style*="text-muted"],
+.dark .pixel-tag { color: var(--text-primary) !important; }
+
+/* Folder tab text */
+.dark .folder-card button,
+.dark .folder-card button * { color: var(--text-primary) !important; }
+
+/* Status badge on project card */
+.dark .project-card [style*="surface"] {
+  background: rgba(255,255,255,0.12) !important;
+  color: #ffffff !important;
+}
+
+/* Skill bar labels */
+.dark .pixel-bar-bg { background: rgba(255,255,255,0.06) !important; }
+
+/* Contact links */
+.dark a.bento-cell,
+.dark a.bento-cell * { color: #ffffff !important; }
+
+/* ─── FONT SIZE BUMPS ─────────────────────────────── */
+/* Bump all Press Start 2P and Space Mono text up slightly */
+body { font-size: 16px; }
+
+.pixel-tag        { font-size: 0.55rem !important; padding: 4px 12px !important; }
+.btn-pixel        { font-size: 0.6rem !important; padding: 12px 22px !important; }
+.font-pixel       { font-size: inherit; }
+
+/* ─── RESPONSIVE ──────────────────────────────────── */
+
+/* Tablet — 768px to 1024px */
+@media (max-width: 1024px) {
+  section { padding: 4rem 1.5rem; }
+
+  .navbar { padding: 0.85rem 1.5rem; }
+
+  /* Bento grids collapse to simpler layouts */
+  .bento-resp-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+
+/* Mobile — up to 767px */
+@media (max-width: 767px) {
+  section { padding: 3rem 1rem; }
+
+  .navbar {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Hide desktop nav links on mobile, show only logo + toggle */
+  .nav-links { display: none !important; }
+
+  /* Bento collapses to single column */
+  .bento-resp-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  /* Marquee text smaller on mobile */
+  .marquee-track span {
+    font-size: 0.4rem !important;
+  }
+
+  /* Folder cards full width */
+  .folder-card { border-radius: 0 4px 4px 4px; }
+
+  /* Project cards stack */
+  .project-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact links stack */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Small mobile — up to 480px */
+@media (max-width: 480px) {
+  section { padding: 2.5rem 0.75rem; }
+
+  .bento-cell { padding: 1rem !important; }
+
+  .pixel-tag { font-size: 0.45rem !important; }
+
+  .btn-pixel { font-size: 0.5rem !important; padding: 10px 16px !important; }
+}
