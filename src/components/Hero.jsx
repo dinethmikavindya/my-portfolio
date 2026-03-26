@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 
 const roles = ['FULL STACK DEV', 'UI/UX DESIGNER', 'GRAPHIC DESIGNER', 'UNDERGRAD STUDENT']
 
-/* ── SVG Icons ─────────────────────────────────────── */
 const CodeIcon = () => (
   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
@@ -21,48 +20,15 @@ const GithubIcon = () => (
 )
 
 const PixelAvatar = () => (
-  <a
-    href="https://github.com/dinethmikavindya"
-    target="_blank"
-    rel="noreferrer"
-    style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
-  >
-    <motion.div
-      className="float"
-      style={{
-        width: 110, height: 110,
-        background: 'var(--mauve-2, #c8b6ff)',
-        border: '3px solid var(--border)',
-        boxShadow: 'var(--pixel-shadow)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        position: 'relative',
-        color: 'var(--text-primary)',
-      }}
-    >
+  <a href="https://github.com/dinethmikavindya" target="_blank" rel="noreferrer"
+    style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>
+    <motion.div className="float"
+      style={{ width: 110, height: 110, background: 'var(--mauve-2, #c8b6ff)', border: '3px solid var(--border)', boxShadow: 'var(--pixel-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', color: 'var(--text-primary)' }}>
       <CodeIcon />
-      {/* Star badge */}
-      <div style={{
-        position: 'absolute', bottom: -6, right: -6,
-        width: 22, height: 22,
-        background: 'var(--petal-frost, #ffd6ff)',
-        border: '2px solid var(--border)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: 'var(--text-primary)',
-      }}>
+      <div style={{ position: 'absolute', bottom: -6, right: -6, width: 22, height: 22, background: 'var(--petal-frost, #ffd6ff)', border: '2px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-primary)' }}>
         <StarIcon />
       </div>
-      {/* GitHub badge */}
-      <div style={{
-        position: 'absolute', top: -6, left: -6,
-        background: 'var(--surface-a)',
-        border: '2px solid var(--border)',
-        padding: '3px 6px',
-        display: 'flex', alignItems: 'center', gap: 4,
-        fontFamily: "'Press Start 2P', monospace",
-        fontSize: '0.35rem',
-        color: 'var(--text-primary)',
-        whiteSpace: 'nowrap',
-      }}>
+      <div style={{ position: 'absolute', top: -6, left: -6, background: 'var(--surface-a)', border: '2px solid var(--border)', padding: '3px 6px', display: 'flex', alignItems: 'center', gap: 4, fontFamily: "'Press Start 2P', monospace", fontSize: '0.35rem', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
         <GithubIcon /> GITHUB
       </div>
     </motion.div>
@@ -101,9 +67,21 @@ const TypewriterText = ({ texts }) => {
   )
 }
 
+/* ── Badge as its own flex row — no absolute positioning ── */
 const StatusBadge = () => (
-  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', border: '2px solid var(--border)', boxShadow: '2px 2px 0 var(--border)', background: 'var(--surface-a)', fontFamily: "'Press Start 2P', monospace", fontSize: '0.4rem', letterSpacing: '0.05em', color: 'var(--text-primary)' }}>
-    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4caf50', display: 'inline-block', boxShadow: '0 0 6px #4caf50' }} />
+  <div style={{
+    display: 'inline-flex', alignItems: 'center', gap: 6,
+    padding: '5px 12px',
+    border: '2px solid var(--border)',
+    boxShadow: '2px 2px 0 var(--border)',
+    background: 'var(--card-bg)',
+    fontFamily: "'Press Start 2P', monospace",
+    fontSize: '0.42rem',
+    letterSpacing: '0.05em',
+    color: 'var(--text-primary)',
+    width: 'fit-content',
+  }}>
+    <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4caf50', display: 'inline-block', flexShrink: 0, boxShadow: '0 0 6px #4caf50' }} />
     AVAILABLE FOR WORK
   </div>
 )
@@ -142,27 +120,42 @@ export default function Hero() {
           .bento-resp-grid > *:nth-child(6) { grid-column: 1 / -1 !important; }
         }
       `}</style>
+
       <div style={{ width: '100%' }}>
         <div className="bento-resp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '12px', width: '100%' }}>
 
-          {/* A: Name */}
-          <BentoCell delay={0} style={{ gridColumn: 'span 8', gridRow: '1', background: 'var(--surface-a)', minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          {/* A: Name cell — badge on top row, name on bottom row via flex column */}
+          <BentoCell delay={0} style={{
+            gridColumn: 'span 8', gridRow: '1',
+            background: 'var(--surface-a)',
+            minHeight: 200,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',  /* badge top, name bottom */
+            gap: '0.75rem',
+            overflow: 'visible',              /* let GitHub badge on avatar peek out */
+          }}>
+            {/* TOP: badge sits alone in its own row */}
             <div>
               <StatusBadge />
+            </div>
+
+            {/* BOTTOM: name + typewriter */}
+            <div>
               <h1 className="glitch-text" data-text="DINETHMI"
-                style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 5vw, 4rem)', letterSpacing: '-0.02em', lineHeight: 1, color: 'var(--text-primary)', marginTop: '0.75rem' }}>
+                style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: 'clamp(1.6rem, 4.5vw, 3.8rem)', letterSpacing: '-0.02em', lineHeight: 1.05, color: 'var(--text-primary)' }}>
                 DINETHMI
               </h1>
-              <h1 style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: 'clamp(1.8rem, 5vw, 4rem)', letterSpacing: '-0.02em', lineHeight: 1, color: 'var(--accent)', marginBottom: '1rem' }}>
+              <h1 style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, fontSize: 'clamp(1.6rem, 4.5vw, 3.8rem)', letterSpacing: '-0.02em', lineHeight: 1.05, color: 'var(--accent)', marginBottom: '0.75rem' }}>
                 WEERASINGHE
               </h1>
+              <TypewriterText texts={roles} />
             </div>
-            <TypewriterText texts={roles} />
           </BentoCell>
 
-          {/* B: Avatar with GitHub link */}
+          {/* B: Avatar */}
           <BentoCell delay={0.1} className="scanlines"
-            style={{ gridColumn: 'span 4', gridRow: '1', background: 'var(--surface-b)', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            style={{ gridColumn: 'span 4', gridRow: '1', background: 'var(--surface-b)', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'visible' }}>
             <PixelAvatar />
             <div style={{ position: 'absolute', top: 8, right: 8, fontFamily: "'Press Start 2P', monospace", fontSize: '0.35rem', color: 'var(--text-muted)', letterSpacing: '0.1em' }}>
               VER 2025.1
