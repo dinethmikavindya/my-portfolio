@@ -16,7 +16,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246461517/Regen',
-        image: '/src/assets/regen-cover.png',
+        image: '/images/regen-cover.png',
       },
       {
         name: 'Your Project 2',
@@ -51,7 +51,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://github.com/dinethmikavindya/fswapify',
-        image: '/publice/images/swapify.png',
+        image: '/images/swapify.png',
       },
       {
         name: 'MAUVE STUDIO',
@@ -60,7 +60,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2026',
         link: 'https://github.com/dinethmikavindya/furniture-design-app',
-        image: '/public/images/furnituredesign.png',
+        image: '/images/furnituredesign.png',
       },
       {
         name: 'Your Project 3',
@@ -86,7 +86,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246468711/Graphic-poster-design',
-        image: '/public/images/poster.png',
+        image: '/images/poster.png',
       },
       {
         name: 'Logo Designs',
@@ -95,7 +95,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246470091/Logo-designs',
-        image: '/public/images/logodesign.png',
+        image: '/images/logodesign.png',
       },
       {
         name: '2D Art',
@@ -104,7 +104,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246467919/2D-Art',
-        image: '/public/images/2Dart.png'
+        image: '/images/2Dart.png'
       },
     ],
   },
@@ -125,7 +125,7 @@ const UploadIcon = () => (
   </svg>
 )
 
-/* ── Project Card with image upload ── */
+/* ── Project Card ── */
 const ProjectCard = ({ project, index }) => {
   const [img, setImg] = useState(project.image)
   const fileRef = useRef()
@@ -161,22 +161,8 @@ const ProjectCard = ({ project, index }) => {
         }}
       >
         {img ? (
-          <>
-            <img src={img} alt={project.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            {/* Replace image button */}
-            <button
-              onClick={e => { e.stopPropagation(); fileRef.current?.click() }}
-              style={{
-                position: 'absolute', bottom: 6, right: 6,
-                background: 'var(--bg)', border: '2px solid var(--border)',
-                padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4,
-                fontFamily: "'Press Start 2P', monospace", fontSize: '0.32rem', color: 'var(--text-primary)',
-              }}
-            >
-              <UploadIcon /> REPLACE
-            </button>
-          </>
+          <img src={img} alt={project.name}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
             <UploadIcon />
