@@ -34,7 +34,7 @@ const categories = [
         status: 'IN PROGRESS',
         year: '2026',
         link: '',
-        image: null,
+        image: '/images/mobitelcover.png',
     },
       
     ],
