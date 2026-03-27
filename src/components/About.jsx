@@ -3,12 +3,12 @@ import { useState } from 'react'
 
 /* ─── DATA ────────────────────────────────────────── */
 const skills = [
-  { label: 'React / Next.js', pct: 90 },
-  { label: 'Node.js / Express', pct: 82 },
-  { label: 'Figma / UI Design', pct: 94 },
-  { label: 'Flutter / React Native', pct: 78 },
+  { label: 'Flutter / Dart', pct: 88 },
+  { label: 'Firebase', pct: 84 },
+  { label: 'Figma / UI Design', pct: 95 },
+  { label: 'React / Next.js', pct: 80 },
   { label: 'Illustrator / PS', pct: 88 },
-  { label: 'Python / Firebase', pct: 76 },
+  { label: 'PHP / Web Dev', pct: 75 },
 ]
 
 const stats = [
@@ -27,10 +27,10 @@ const techStack = [
 ]
 
 const statusItems = [
-  { icon: '◎', label: 'UNDERGRADUATE STUDENT' },
-  { icon: '◈', label: 'FULL STACK DEVELOPER' },
+  { icon: '◎', label: 'SE UNDERGRAD @ NSBM' },
+  { icon: '◈', label: 'FLUTTER + FIREBASE DEV' },
   { icon: '◆', label: 'UI/UX + GRAPHIC DESIGNER' },
-  { icon: '▶', label: 'OPEN TO OPPORTUNITIES' },
+  { icon: '▶', label: 'VIBE CODER — AI POWERED' },
 ]
 
 /* ─── SUB-COMPONENTS ──────────────────────────────── */
@@ -113,7 +113,6 @@ const TechStackWidget = () => {
       viewport={{ once: true }} transition={{ delay: 0.6 }}
       style={{ gridColumn: '1 / -1', background: 'var(--card-bg)', padding: '2.5rem' }}
     >
-      {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
         <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.65rem', color: 'var(--text-muted)', letterSpacing: '0.1em' }}>
           TECH.STACK
@@ -175,7 +174,6 @@ const TechStackWidget = () => {
             </div>
           </div>
 
-          {/* Snap buttons */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
             {techStack.map(g => (
               <motion.button key={g.category} onClick={() => snapTo(g.category)}
@@ -265,10 +263,13 @@ export default function About() {
           style={{ gridColumn: 'span 6', background: 'var(--surface-a)', position: 'relative' }}>
           <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '0.55rem', color: 'var(--text-muted)', marginBottom: '1rem', letterSpacing: '0.1em' }}>BIO.TXT</div>
           <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 'clamp(0.7rem, 1.5vw, 0.82rem)', lineHeight: 2, color: 'var(--text-secondary)' }}>
-            Hi, I'm <strong>Dinethmi</strong> — an undergraduate passionate about building digital experiences that blend design and functionality.
+            Software Engineering undergraduate at <strong>NSBM Green University</strong>, affiliated with Plymouth University
+            passionate about UI/UX design, mobile app development, and modern web technologies.
           </p>
           <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 'clamp(0.7rem, 1.5vw, 0.82rem)', lineHeight: 2, color: 'var(--text-secondary)', marginTop: '0.75rem' }}>
-            I work across the full stack, combining solid engineering with a strong eye for UI — leveraging a range of technologies to create efficient, intuitive, and well-designed applications.
+            I <strong>vibe code</strong> moving with AI to bring ideas, designs and solutions to life fast.
+            Skilled in Flutter, Firebase, Figma and full-stack web development, I bridge the gap between
+            solid engineering and pixel-perfect design.
           </p>
           <div style={{ position: 'absolute', bottom: 12, right: 12, fontFamily: "'Press Start 2P', monospace", fontSize: '0.35rem', color: 'var(--text-muted)', opacity: 0.4 }}>◆ ◆ ◆</div>
         </motion.div>
