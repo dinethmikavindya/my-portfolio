@@ -45,22 +45,22 @@ const categories = [
     color: 'var(--surface-c)',
     projects: [
       {
-        name: 'Dev Portfolio v2',
-        desc: 'This very site — built with React + Vite, Tailwind CSS, Framer Motion and a pixel-futuristic bento grid layout. Features dark/light mode, 3D Rubik\'s cube tech stack, and folder-style project cards.',
-        tags: ['React', 'Vite', 'Framer Motion', 'Tailwind'],
-        status: 'IN PROGRESS',
+        name: 'SWAPIFY',
+        desc: 'A mobile skill-swapping platform that connects users to exchange skills seamlessly',        
+        tags: ['Figma', 'Flutter', 'Firebase'],
+        status: 'COMPLETED',
         year: '2025',
-        link: 'https://github.com/dinethmikavindya',
-        image: null,
+        link: 'https://github.com/dinethmikavindya/fswapify',
+        image: '/publice/images/swapify.png',
       },
       {
-        name: 'Your Project 2',
-        desc: 'Add your second full stack project here.',
-        tags: ['Node.js', 'React'],
+        name: 'MAUVE STUDIO',
+        desc: 'Interactive 2D & 3D furniture visualization experience for smarter space planning.',
+        tags: ['Next.js', 'Tailwind CSS', 'Three.js', 'R3F', 'React Konva'],
         status: 'COMPLETED',
-        year: '2024',
-        link: '',
-        image: null,
+        year: '2026',
+        link: 'https://github.com/dinethmikavindya/furniture-design-app',
+        image: '/public/images/furnituredesign.png',
       },
       {
         name: 'Your Project 3',
@@ -86,7 +86,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246468711/Graphic-poster-design',
-        image: '/src/assets/poster.png',
+        image: '/public/images/poster.png',
       },
       {
         name: 'Logo Designs',
@@ -95,7 +95,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246470091/Logo-designs',
-        image: '/src/assets/logodesign.png',
+        image: '/public/images/logodesign.png',
       },
       {
         name: '2D Art',
@@ -104,7 +104,7 @@ const categories = [
         status: 'COMPLETED',
         year: '2025',
         link: 'https://www.behance.net/gallery/246467919/2D-Art',
-        image: '/src/assets/2Dart.png'
+        image: '/public/images/2Dart.png'
       },
     ],
   },
